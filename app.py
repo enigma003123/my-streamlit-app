@@ -7,8 +7,7 @@ import os
 import soundfile as sf
 
 # Title of the app
-st.title("Audio to Text ")
-st.write("hello")
+st.title("Speech translator ")
 
 # Language selection for audio (including Arabic)
 audio_language = st.selectbox("Select the language of the audio", 
@@ -80,3 +79,4 @@ if uploaded_file is not None:
         os.remove(mp3_file_path)  # Remove the MP3 file
         os.remove(wav_file_path)   # Remove the WAV file
         st.success("Temporary files deleted.")
+st.write("speech recognition project by mazin")
