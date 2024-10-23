@@ -8,6 +8,7 @@ import soundfile as sf
 
 # Title of the app
 st.title("Audio to Text Translator")
+st.write("hello")
 
 # Language selection for audio (including Arabic)
 audio_language = st.selectbox("Select the language of the audio", 
