@@ -1,24 +1,10 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import streamlit as st
 import speech_recognition as sr
 from gtts import gTTS
 from deep_translator import GoogleTranslator
 import tempfile
 import os
-from pydub import AudioSegment
+import soundfile as sf
 
 # Title of the app
 st.title("Audio to Text Translator")
@@ -55,39 +41,41 @@ if uploaded_file is not None:
                                     ["fr", "de", "es", "it", "zh", "ja", "ru", "ar"])
 
     if st.button("Translate"):
-        # Translate the text
-        translated_text = GoogleTranslator(source='auto', target=target_language).translate(text)
-        st.write("Translated Text:")
-        st.write(translated_text)
+        if text:  # Ensure text is not empty
+            # Translate the text
+            translated_text = GoogleTranslator(source='auto', target=target_language).translate(text)
+            st.write("Translated Text:")
+            st.write(translated_text)
 
-        # Convert translated text to audio
-        tts = gTTS(translated_text, lang=target_language)
-        
-        # Save the audio file as mp3 first
-        mp3_file_path = tempfile.mktemp(suffix=".mp3")
-        tts.save(mp3_file_path)
+            # Convert translated text to audio and save as WAV
+            tts = gTTS(translated_text, lang=target_language)
+            mp3_file_path = tempfile.mktemp(suffix=".mp3")
+            tts.save(mp3_file_path)
 
-        # Convert the mp3 file to wav format using pydub
-        wav_file_path = tempfile.mktemp(suffix=".wav")
-        audio_segment = AudioSegment.from_mp3(mp3_file_path)
-        audio_segment.export(wav_file_path, format="wav")
+            # Read the MP3 file using soundfile
+            data, sample_rate = sf.read(mp3_file_path)
 
-        # Provide audio playback option
-        st.audio(wav_file_path, format='audio/wav')
+            # Save it as WAV
+            wav_file_path = tempfile.mktemp(suffix=".wav")
+            sf.write(wav_file_path, data, sample_rate)
 
-        # Add download button for the translated audio in wav format
-        with open(wav_file_path, "rb") as audio_file:
-            st.download_button(
-                label="Download Translated Audio (WAV)",
-                data=audio_file,
-                file_name="translated_audio.wav",
-                mime="audio/wav"
-            )
+            # Provide audio playback option
+            st.audio(wav_file_path, format='audio/wav')
 
-        # Clean up temporary files
-        if st.button("Delete Temporary Files"):
-            os.remove(temp_file_path)
-            os.remove(mp3_file_path)  # Remove the MP3 file if needed
-            os.remove(wav_file_path)   # Remove the WAV file if needed
-            st.success("Temporary files deleted.")
+            # Add download button for the translated audio in WAV format
+            with open(wav_file_path, "rb") as audio_file:
+                st.download_button(
+                    label="Download Translated Audio (WAV)",
+                    data=audio_file,
+                    file_name="translated_audio.wav",
+                    mime="audio/wav"
+                )
+        else:
+            st.error("No text to translate.")
 
+    # Clean up temporary files
+    if st.button("Delete Temporary Files"):
+        os.remove(temp_file_path)
+        os.remove(mp3_file_path)  # Remove the MP3 file
+        os.remove(wav_file_path)   # Remove the WAV file
+        st.success("Temporary files deleted.")
