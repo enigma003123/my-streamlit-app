@@ -1,41 +1,3 @@
-# from deep_translator import GoogleTranslator
-# from Languages import *
-# import streamlit as st
-# import tempfile
-# import os
-
-# def translate(src,to,text):
-#     translator =GoogleTranslator(source=f"{src}",target=f"{to}")
-#     out =translator.translate(f"{text}")
-#     return out
-
-
-# st.title("Translator")
-# # st=st.form(key="form1")
-# audio_file=st.file_uploader("upload yiur audio file (.wav)",["wav"])
-# if st.button("listen",key="3123") and audio_file is not None:
-#     with tempfile.NamedTemporaryFile(delete=False) as temp_file:
-#         temp_file.write(audio_file.read())
-#         temp_file_path = temp_file.name
-#         # st.write(temp_file_path)
-#     st.audio(temp_file_path, format='audio/wav')  # or 'audio/mp3'
-#     if st.button("Delete Temporary File"):
-#         os.remove(temp_file_path)
-#         st.success("Temporary file deleted.")
-# src=st.selectbox("From",["arabic","english","spanish","french"],key="src")
-# user_input=st.text_area("Enter text")
-# target=st.selectbox("To",["arabic","english","spanish","french"],key="trgt")
-# b1=st.button("Translate")
-# # if b1:
-# #     f1.text_area("Result",f"{translate(src,target,user_input)}")
-
-
-
-# # m=GoogleTranslator.get_supported_languages(GoogleTranslator())
-# # print(m)
-# # translator =GoogleTranslator(source="auto",target="arabic")
-# # out =translator.translate("hello")
-# # print(out)
 
 
 
@@ -47,9 +9,7 @@
 
 
 
-# langs=['afrikaans', 'albanian', 'amharic', 'arabic', 'armenian', 'azerbaijani', 'basque', 'belarusian', 'bengali', 'bosnian', 'bulgarian', 'catalan', 'cebuano', 'chichewa', 'chinese (simplified)', 'chinese (traditional)', 'corsican', 'croatian', 'czech', 'danish', 'dutch', 'english', 'esperanto', 'estonian', 'filipino', 'finnish', 'french', 'frisian', 'galician', 'georgian', 'german', 'greek', 'gujarati', 'haitian creole', 'hausa', 'hawaiian', 'hebrew', 'hebrew', 'hindi', 'hmong', 'hungarian', 'icelandic', 'igbo', 'indonesian', 'irish', 'italian', 'japanese', 'javanese', 'kannada', 'kazakh', 'khmer', 'korean', 'kurdish (kurmanji)', 'kyrgyz', 'lao', 'latin', 'latvian', 'lithuanian', 'luxembourgish', 'macedonian', 'malagasy', 'malay', 
-# 'malayalam', 'maltese', 'maori', 'marathi', 'mongolian', 'myanmar (burmese)', 'nepali', 'norwegian', 'odia', 'pashto', 'persian', 'polish', 'portuguese', 'punjabi', 'romanian', 'russian', 'samoan', 'scots gaelic', 
-# 'serbian', 'sesotho', 'shona', 'sindhi', 'sinhala', 'slovak', 'slovenian', 'somali', 'spanish', 'sundanese', 'swahili', 'swedish', 'tajik', 'tamil', 'telugu', 'thai', 'turkish', 'ukrainian', 'urdu', 'uyghur', 'uzbek', 'vietnamese', 'welsh', 'xhosa', 'yiddish', 'yoruba', 'zulu']
+
 
 
 import streamlit as st
